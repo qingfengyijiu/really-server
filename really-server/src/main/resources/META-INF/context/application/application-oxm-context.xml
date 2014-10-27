@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+	   <property name="encoding" value="UTF-8" />
+	   <property name="autodetectAnnotations" value="true"/>
+	   <property name="supportedClasses">
+	       <!--不可缺少-->
+           <list>
+               <!-- <value>secfox.soc.melon.core.web.Person</value> -->
+           </list>
+       </property>
+	   <property name="annotatedClasses">
+	       <array>
+	           <value>com.really.user.domain.User</value>
+               <!-- <value>secfox.soc.melon.core.web.mapping.Url</value>
+               <value>secfox.soc.melon.core.web.mapping.Controller</value>
+               <value>secfox.soc.melon.core.web.mapping.Mapping</value> -->
+	       </array>
+	   </property>
+	</bean>
+
+	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+		<property name="deserializersByType">
+		  <map>
+		      <!-- <entry key="java.util.Date">
+		          <bean class="com.really.util.LongDateJsonDeserializer"/>
+		      </entry> -->
+		  </map>
+		</property>
+		<property name="serializersByType">
+		  <map>
+		      <!-- <entry key="java.util.Date">
+		          <bean class="com.really.util.LongDateJsonSerializer"/>
+		      </entry> -->
+		  </map>
+		</property>
+		<property name="featuresToDisable">
+           <array>
+             <util:constant static-field="com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES"/>
+           </array>
+		</property>
+	</bean>
+	
+</beans>

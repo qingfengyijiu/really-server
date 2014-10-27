@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 用来配置持久层，数据库连接和事务管理 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://115.28.220.31:3306/wx"/>
+		<property name="username" value="root"/>
+		<property name="password" value="zhangjx"></property>
+	</bean>
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+	
+	<util:map id="jpaPropertyMap">
+		<entry key="hibernate.hbm2ddl.auto" value="create"/>
+		<entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+		<entry key="hibernate.max_fecth_depth" value="4"/>
+		<entry key="hibernate.cache.use_second_level_cache" value="true"/>
+		<entry key="hibernate.cache.use_query_cache" value="true"/>
+		<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+	</util:map>
+	
+	<bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="MYSQL"/>
+		<property name="showSql" value="true"/>
+		<property name="generateDdl" value="true"/>
+		<property name="databasePlatform" value="org.hibernate.dialect.MYSQLDialect"/>
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="persistenceUnitName" value="jpa" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="loadTimeWeaver">
+			<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<constructor-arg>
+			<ref bean="entityManagerFactory"/>
+		</constructor-arg>
+		<property name="nestedTransactionAllowed" value="true"/>
+	</bean>
+	
+	<util:property-path id="sessionFactory" path="entityManagerFactory.sessionFactory" />
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>
+		

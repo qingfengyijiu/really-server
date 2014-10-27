@@ -1,0 +1,71 @@
+.filter-dialog {
+	position:absolute;
+	left:40%;
+	top:30%;
+	border:1px solid black;
+	padding-bottom:10px;
+	z-index:1000;
+	font-family:"微软雅黑";
+	text-align:center;
+	font-size:13px;
+	font-weight:400;
+	color:#333333;
+	background:#FFFFFF;
+}
+.dialog-header {
+	width:100%;
+	background:#EDEDED;
+	border-bottom:1px solid #C8C8C8;
+}
+.header-item {
+	margin-top:5px;
+}
+.header-item.title-zone {
+	float:left;
+	margin-left:10px;
+}
+.header-item.condition-zone {
+	float:right;
+	margin-right:10px;
+}
+.ui-helper-clearfix {
+	clear:both;
+}
+table.filter-content {
+	border-collapse:collapse;
+	display:block;
+	table-layout:fixed;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+table.filter-content th, table.filter-content td{
+	border:1px solid black;
+}
+.filter-dialog .filter-content {
+	widht:100%;
+	margin-top:10px;
+}
+.filter-dialog .dialog-footer {
+	margin-top:10px;
+	width:100%;
+}
+.filter-dialog .dialog-footer .btn-zone {
+	float:right;
+}
+.filter-dialog .dialog-footer .btn-zone button {
+	margin-right:10px;
+}
+.filter-dialog .ui-button {
+	background:url(../images/ui-button-bg.png) no-repeat;
+	width:80px;
+	height:23px;
+	color:#2365a7;
+	border:none;
+}
+.filter-dialog .filter-input {
+	color:#000000;
+	width:110px;
+	background:#CCE8CF;
+	margin-right:20px;
+}

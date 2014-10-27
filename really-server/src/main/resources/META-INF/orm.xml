@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	 <!-- 根据openId查询微信用户信息 -->
+    <!-- <named-query name="Customer.findByOpenId">
+        <query>select customer from Customer customer where customer.openId = :openId</query>
+        <hint name="org.hibernate.cacheable" value="false"/>
+        <hint name="org.hibernate.timeout" value="10"/>
+    </named-query> -->
+</entity-mappings>

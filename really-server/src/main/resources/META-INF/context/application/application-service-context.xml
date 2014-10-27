@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="fallbackToSystemLocale" value="false" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <!--仅限测试环境使用0(每次请求时都会载入配置文件),推荐-1(缓存不更新) -->
+        <property name="cacheSeconds" value="0" />
+        <property name="basenames">
+            <list>
+            	<value>classpath:i18n/test</value>
+            </list>
+        </property>
+    </bean>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource">
+			<ref bean="messageSource" />
+		</property>
+	</bean>
+	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+			</list>
+		</property>
+		<property name="formatters">
+			<set>
+			</set>
+		</property>
+		<property name="formatterRegistrars">
+			<set>
+				<bean id="myFormatterRegistrar" class="com.really.util.MyFormatterRegistrar"/>
+			</set>
+		</property>
+	</bean>
+	
+
+</beans>

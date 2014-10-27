@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="jpa"    transaction-type="RESOURCE_LOCAL">
+        <mapping-file>META-INF/orm.xml</mapping-file>
+        <!-- 系统核心类 -->
+        <class>com.really.user.domain.User</class>
+        <class>com.really.news.domain.News</class>
+        <class>com.really.comment.domain.Comment</class>
+        <class>com.really.opinion.domain.Opinion</class>
+        <class>com.really.comment.hotspot.domain.CommentHotspot</class>
+        
+        <exclude-unlisted-classes/>
+        <validation-mode>NONE</validation-mode>
+        <properties>
+            <property name="javax.persistence.validation.mode" value="NONE" />
+            <property name="javax.persistence.provider" value="org.hibernate.ejb.HibernatePersistence" />
+            <!-- Basic Hibernate -->
+            <property name="hibernate.dialect" value="${hibernate.dialect}" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.connection.useUnicode" value="true" />
+            <property name="hibernate.connection.charSet" value="UTF-8" />
+            <!-- Fetch Config -->
+            <property name="hibernate.bytecode.use_reflection_optimizer" value="true" />
+            <property name="hibernate.jdbc.use_scrollable_resultset" value="false" />
+            <property name="hibernate.jdbc.use_streams_for_binary" value="true" />
+            <property name="hibernate.jdbc.fetch_size" value="300" />
+            <property name="hibernate.max_fetch_depth" value="3" />
+            <!-- Cache -->
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+            <property name="hibernate.cache.use_query_cache" value="true"/>
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.generate_statistics" value="${hibernate.debug}"/>
+            <property name="hibernate.cache.use_structured_entries" value="${hibernate.debug}"/>
+            <!-- DEBUG Hibernate -->
+            <property name="hibernate.show_sql" value="${hibernate.debug}" />
+            <property name="hibernate.format_sql" value="${hibernate.debug}" />
+            <property name="hibernate.generate_statistics" value="${hibernate.debug}" />
+            <property name="hibernate.use_sql_comments" value="${hibernate.debug}" />
+        </properties>
+	</persistence-unit>
+</persistence>
